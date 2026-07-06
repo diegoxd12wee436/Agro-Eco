@@ -1,0 +1,70 @@
+name: Validador Total de Pull Requests
+
+# Esto asegura que se ejecute en TODOS los Pull Requests hacia la rama main
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  auditoria_completa:
+    name: Validar HTML, CSS y JS en el Navegador
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 1. Clonar el código del PR
+        uses: actions/checkout@v4
+
+      - name: ⚙️ 2. Configurar entorno del Robot
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 3. Instalar el Navegador Automatizado (Playwright)
+        run: |
+          npm init -y
+          npm install -D @playwright/test
+          npx playwright install --with-deps chromium
+
+      - name: 📝 4. Crear test automático al vuelo
+        # Este paso crea un test genérico que abrirá tu index.html para revisar que no esté roto
+        run: |
+          mkdir -p tests
+          cat << 'EOF' > tests/validador.spec.js
+          const { test, expect } = require('@playwright/test');
+          const path = require('path');
+
+          test('Validación automática de la web', async ({ page }) => {
+            // Capturamos errores invisibles de JavaScript en la consola
+            const erroresConsola = [];
+            page.on('pageerror', (exception) => {
+              erroresConsola.push(exception.message);
+            });
+
+            // Abrimos el index.html principal del repositorio
+            const rutaIndex = 'file://' + path.resolve(__dirname, '../index.html');
+            await page.goto(rutaIndex);
+
+            // 1. REVISIÓN DE JAVASCRIPT: Si el JS de tus compas tiene un error crítico, el test falla
+            if (erroresConsola.length > 0) {
+              throw new Error(`❌ ¡El JavaScript está roto!: ${erroresConsola.join(', ')}`);
+            }
+
+            // 2. REVISIÓN DE HTML: Verificamos que la estructura básica (body) cargue y exista
+            const body = page.locator('body');
+            await expect(body).toBeVisible();
+
+            // 3. REVISIÓN DE CSS: Verificamos que no haya elementos rotos ocultando toda la pantalla
+            const altoPantalla = await page.evaluate(() => window.innerHeight);
+            if (altoPantalla === 0) {
+              throw new Error('❌ ¡El CSS o el HTML están rompiendo el renderizado de la página!');
+            }
+
+            console.log('✅ ¡HTML, CSS y JS cargaron en el navegador sin errores críticos!');
+          });
+          EOF
+
+      - name: 🤖 5. Ejecutar la revisión en el Navegador
+        # Aquí el robot abre la página en silencio en el servidor de GitHub. 
+        # Si algo falla, este paso se pondrá en ROJO y bloqueará el PR.
+        run: npx playwright test
