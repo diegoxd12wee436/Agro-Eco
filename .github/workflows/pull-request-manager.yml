@@ -18,7 +18,7 @@ jobs:
       - name: ⚙️ 2. Configurar entorno del Robot
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: 📦 3. Instalar el Navegador Automatizado (Playwright)
         run: |
