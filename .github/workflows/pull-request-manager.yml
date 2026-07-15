@@ -1,0 +1,92 @@
+name: Validador Total de Pull Requests
+
+# Esto asegura que se ejecute en TODOS los Pull Requests hacia la rama main
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  auditoria_completa:
+    name: Validar HTML, CSS y JS en el Navegador
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 1. Clonar el código del PR
+        uses: actions/checkout@v4
+
+      - name: ⚙️ 2. Configurar entorno del Robot
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: 📦 3. Instalar el Navegador Automatizado (Playwright)
+        run: |
+          npm init -y
+          npm install -D @playwright/test
+          npx playwright install --with-deps chromium
+
+      - name: 📝 4. Crear test automático al vuelo
+        run: |
+          mkdir -p tests
+          cat << 'EOF' > tests/validador.spec.js
+          const { test, expect } = require('@playwright/test');
+          const path = require('path');
+          const fs = require('fs');
+
+          // Función para buscar el index.html en cualquier subcarpeta
+          function buscarIndex(dir) {
+            const archivos = fs.readdirSync(dir);
+            for (const archivo of archivos) {
+              const rutaAbsoluta = path.join(dir, archivo);
+              if (fs.statSync(rutaAbsoluta).isDirectory()) {
+                // Evitamos buscar en carpetas del sistema o de pruebas
+                if (archivo !== 'node_modules' && archivo !== '.git' && archivo !== 'tests') {
+                  const encontrado = buscarIndex(rutaAbsoluta);
+                  if (encontrado) return encontrado;
+                }
+              } else if (archivo === 'index.html') {
+                return rutaAbsoluta;
+              }
+            }
+            return null;
+          }
+
+          test('Validación automática de la web', async ({ page }) => {
+            const erroresConsola = [];
+            page.on('pageerror', (exception) => {
+              erroresConsola.push(exception.message);
+            });
+
+            // Buscamos el index.html dinámicamente en todo el proyecto
+            const rutaRaiz = path.resolve(__dirname, '..');
+            const archivoEncontrado = buscarIndex(rutaRaiz);
+
+            if (!archivoEncontrado) {
+              throw new Error('❌ ¡No se encontró ningún archivo index.html en todo el repositorio!');
+            }
+
+            const rutaIndex = 'file://' + archivoEncontrado;
+            console.log(`Abriendo: ${rutaIndex}`);
+            await page.goto(rutaIndex);
+
+            if (erroresConsola.length > 0) {
+              throw new Error(`❌ ¡El JavaScript está roto!: ${erroresConsola.join(', ')}`);
+            }
+
+            const body = page.locator('body');
+            await expect(body).toBeVisible();
+
+            const altoPantalla = await page.evaluate(() => window.innerHeight);
+            if (altoPantalla === 0) {
+              throw new Error('❌ ¡El CSS o el HTML están rompiendo el renderizado!');
+            }
+
+            console.log('✅ ¡HTML, CSS y JS cargaron perfectamente!');
+          });
+          EOF
+
+      - name: 🤖 5. Ejecutar la revisión en el Navegador
+        # Aquí el robot abre la página en silencio en el servidor de GitHub. 
+        # Si algo falla, este paso se pondrá en ROJO y bloqueará el PR.
+        run: npx playwright test
