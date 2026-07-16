@@ -10,6 +10,12 @@
 :root{
     --font-primary: 'Poppins', sans-serif;
     --font-secundary: 'Iosevka Charon', monospace;
+    --font-size-primary: 16px;
+    --font-weight-primary: 500;
+    --font-weigth-secundary: 400;
+}
+body{
+    font-family: var(--font-primary);   
 }
 /*Styles del sidebar nota: a cada elemento le pondre coments para que lean el codigo bien */
 aside{
@@ -21,19 +27,62 @@ aside{
     /*Color de fondo del sidebar*/
     background-color: #1D634F;
 }
+/* COntenedor de todo el Dashboard */
+.contenedor{
+    display:flex;
+    flex-wrap: wrap;
+}
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;     
+}
+.logo{
+    overflow:visible;
+    display: flex;
+    align-items: center;
+    gap:12px;
+    margin-bottom: 20px;
+}
+.logo-text{
+    
+    text-align: center;
+    font-family: var(--font-secundary);
+    font-size: 30px;
+    font-weight: 700;
+    color: #EDEDED;
+}
+.sidebar ul{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    margin:0;
+    padding:0;
+    
+}
 .sidebar ul li a{
     display:grid;
     grid-template-columns: 40px 1fr;
     gap :10px;
     padding:10px 20px;
-    align-items: center;   
-    color:#EDEDED; 
+    align-items: center;  
+    margin-top:10px; 
+    color:#EDEDED;
+    font-size: var(--font-size-primary);
+    font-weight: var(--font-weight-primary);
+    border-radius: 12px; 
+    cursor:default;
     transition:all 0.3s ease-in-out;   
 }
-
+.sidebar ul li a:hover{    
+    background-color: rgba(255, 255, 255, 0.08);
+}
 .sidebar ul li a.active{
-    background-color: #2FA084;
-    border-radius: 6px;
+    background-color: #2FA084;    
+}
+/*logout style*/
+.sidebar_2{
+    margin-top: auto;
 }
 
 
