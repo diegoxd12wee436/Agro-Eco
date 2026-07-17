@@ -26,7 +26,7 @@ body{
 aside{
     display:flex;
     flex-direction: column;
-    max-width: 300px;
+    max-width: 250px;
     height: 100vh;
     padding:20px;   
     /*Color de fondo del sidebar*/
@@ -53,7 +53,7 @@ aside{
     
     text-align: center;
     font-family: var(--font-secundary);
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 700;
     color: #EDEDED;
 }
@@ -73,7 +73,7 @@ aside{
     align-items: center;  
     margin-top:10px; 
     color:#EDEDED;
-    font-size: var(--font-size-primary);
+    font-size:14px;
     font-weight: var(--font-weight-primary);
     border-radius: 12px; 
     cursor:default;
@@ -88,7 +88,12 @@ aside{
 /*logout style*/
 .sidebar_2{
     margin-top: auto;
+    
 }
+.txtlogout{
+    color: #BC6661;
+}
+
 /*---------------------------------------*/
 /* Hero Conatiner el dahsboard principal */
 /*---------------------------------------*/
