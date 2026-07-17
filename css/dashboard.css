@@ -100,31 +100,38 @@ aside{
 .container-main{
     position:relative;    
     max-width: 100%;
-    display:grid;
+    display:flex;
+    flex-direction: column;    
     height: 100vh;
+    gap:20px
+   
+    
 }
 
 .HeroHeader{   
     width: 100%;    
     display:flex;  
-    margin-top:10px; 
-    
+    margin-top:10px;
+    height: fit-content; 
     position: relative;
 }
 .hero-image{
     display: block;    
     width: 95%;
     height: 12vw;
-    max-height: 150px;
+    max-height: 160px;
     object-fit: cover; 
-    
-        
+    border-radius: 12px;
+    border: 1px solid #758A93;
+    filter: blur(1px);  
 }
+
 /* 🚀 Flotamos los contenidos encima de la imagen */
 .left {
     max-height: 150px;
     display: flex;
     flex-direction: column;
+    
     
     position: absolute;
     top: 25px;     /* Distancia desde el borde superior del fondo */
@@ -143,6 +150,7 @@ aside{
 }
 .HeadText{
     margin-top: 25px;
+    
 }
 .HeadText span{
     color: var(--color-text-primary);
@@ -152,8 +160,8 @@ aside{
 
 .rigth {
     position: absolute;
-    top: 44px;     /* Distancia desde el borde superior del fondo */
-    right: 60px;   /* Distancia desde el borde derecho del fondo */
+    top:12px;     /* Distancia desde el borde superior del fondo */
+    right: 74px;   /* Distancia desde el borde derecho del fondo */
     z-index: 2;
 }
 
@@ -161,8 +169,10 @@ aside{
 .boxes{
     margin-left:20px;
     display:grid;
+    
     grid-template-columns: 1fr 1fr;  
     gap:15px;
+
 }
 .box1, .box2{
     display:flex;
@@ -192,8 +202,10 @@ aside{
     color: var(--color-text-secundary); /* el color se cambiar conforme al estado en js con c# */
 }
 /*---------------------------------------*/
-/*styles de cajas de dashboar sensore etc */
-.boxesD{
+/*styles de cajas de dashboar sensores etc */
+.boxesD{      
+    width: 100%;
+    max-width: 95%;
     display:grid;
     grid-template-columns: repeat(4 , 1fr);
     height: 90px;
