@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <!-- SideBar-->
+    <!--Nota: Cada span tiene su id para identificarlo en el código js-->
+    <div class="contenedor">
+        <aside>
+            <nav class="sidebar">
+                <!--Logo AgroEco-->
+                <div class="logo">
+                    <img src = "/images/svg-hackaton/Logo.svg" class = "logo-svg" alt="Logo AgroEco" width = "70px" height = "auto">    
+                    <span id = "agroeco" class = "logo-text">AgroEco</span>            
+                </div>
+                <ul>
+                    <div class="sb_1">
+                        <li><a href="#"><img class = "icon"src = "/images/svg-hackaton/objects-column 1.svg" alt="Dashboard" width = "25px" height = "25px"> <span id = "home">DashBoard</span></a></li>
+                        <li><a href="#"><img class = "icon"src = "/images/svg-hackaton/signal-stream 1.svg" alt="GestorTareas" width = "25px" height = "25px"> <span id = "tareas">Tareas</span></a></li>
+                        <li><a href="#"><img class = "icon"src = "/images/svg-hackaton/Vector.svg" alt="Sensores" width = "25px" height = "25px"> <span id = "sensores">Sensores</span></a></li>
+                        <li><a href="#"><img class = "icon"src = "/images/svg-hackaton/Group 141.svg" alt="Plagas" width = "25px" height = "25px"> <span id = "plagas">Plagas</span></a></li>
+                        <li><a href="#"><img class = "icon"src = "/images/svg-hackaton/Vector (1).svg" alt="Imagen" width = "25px" height = "25px"> <span id = "educacion">Educacion</span></a></li>
+                        <li><a href="#"><img class = "icon"src = "/images/svg-hackaton/Vector (2).svg" alt="Bodega" width = "25px" height = "25px"> <span id = "Bodega">Bodega</span></a></li>
+                        <li><a href="#"><img class = "icon"src = "/images/svg-hackaton/Vector (3).svg" alt="Finanza" width = "25px" height = "25px"> <span id = "finanza">Finanza</span></a></li>
+                    </div>
+                    <!-- Log Out alfinal-->
+                    <div class="sidebar_2">
+                        <li><a href="#"><img class = "icon logout"src = "/images/svg-hackaton/vector (4).svg" alt="Log Out" width = "20px" height = "20px"> <span class = "txtlogout" id = "logout">Log Out</span></a></li>
+                    </div>
+                </ul>
+            </nav>
+        </aside>
+        <!--Contenido principal-->   
+
+        <main>
+            <div class="container-main">
+                <div class="HeroHeader">   
+                    <img class = "hero-image" src = "/images/svg-hackaton/divided-field-green-yellow-crops1.svg">                
+                    <!--volver al selector-->                    
+                    <div class="left">
+                        <!--Left side para division del bloque-->
+                        <div class="union">
+                            <img src = "/images/svg-hackaton/arrow-left.svg">
+                            <span id = " volver">Volver al selector de fincas</span>
+                        </div>
+                        <!--Logo AgroEco-->
+                        <div class="HeadText">                            
+                            <span id = "id-finca" class = "FincaName">Finca : NAME</span>           
+                        </div>
+                    </div>
+                    <!-- Right side for content (basicamente los info boxes )-->
+                    <div class="rigth">
+                        <div class="boxes">
+                            <div class="box1">
+                                <img src = "/images/svg-hackaton/vector (5).svg" width = "30px" height = "30px">
+                                    <p class = "title">Temperatura Ambiente</p>
+                                <span id = "Temperatura" class = "valueT">25°C </span>
+                                 <p id= "nota-temperatura" class = "note">Optimo</p>
+                            </div>
+                            <div class="box2">
+                                <img src = "/images/svg-hackaton/blood 1.svg" width = "30px" height = "30px">
+                                <p class = "title" > Humedad del suelo </p> 
+                                <span id = "Humedad" class = "valueH">60% </span>
+                                <p id= "nota-humedad" class = "note">Optimo</p> <!--Nota Aqui el valor cambiara con c# y js-->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                </div>
+                <div class="boxesD">
+                        <div class="box">
+
+                        </div>
+                        <div class="box">
+
+                        </div>
+                        <div class="box">
+
+                        </div>
+                        <div class="box">
+                            
+                        </div>
+
+                    </div>
+                
+                
+                
+
+            </div>
+        </main>
+
+
+    </div>
+    <script src = "/javascript/dashboard.js"></script>
+</body>
+</html>

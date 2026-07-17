@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Boldonse&family=Iosevka+Charon:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-decoration: none;
+    list-style: none;
+}
+:root{
+    --font-primary: 'Poppins', sans-serif;
+    --font-secundary: 'Iosevka Charon', monospace;
+    --font-size-primary: 16px;
+    --font-weight-primary: 600;
+    --font-weigth-secundary: 400;
+    --color-text-primary: #2C2C2C;
+    --color-text-secundary: #758A93;
+    --color-text-custom1:#1D634F;
+    --color-text-custom2:#D97706;
+}
+body{
+    font-family: var(--font-primary);   
+    background-color: #EEEEEE;
+}
+/*Styles del sidebar nota: a cada elemento le pondre coments para que lean el codigo bien */
+aside{
+    display:flex;
+    flex-direction: column;
+    max-width: 250px;
+    height: 100vh;
+    padding:20px;   
+    /*Color de fondo del sidebar*/
+    background-color: #1D634F;
+}
+/* COntenedor de todo el Dashboard */
+.contenedor{
+    display:grid;
+    grid-template-columns: 300px 1fr;
+}
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;     
+}
+.logo{
+    overflow:visible;
+    display: flex;
+    align-items: center;
+    gap:12px;
+    margin-bottom: 20px;
+}
+.logo-text{
+    
+    text-align: center;
+    font-family: var(--font-secundary);
+    font-size: 28px;
+    font-weight: 700;
+    color: #EDEDED;
+}
+.sidebar ul{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    margin:0;
+    padding:0;
+    
+}
+.sidebar ul li a{
+    display:grid;
+    grid-template-columns: 40px 1fr;
+    gap :10px;
+    padding:10px 20px;
+    align-items: center;  
+    margin-top:10px; 
+    color:#EDEDED;
+    font-size:14px;
+    font-weight: var(--font-weight-primary);
+    border-radius: 12px; 
+    cursor:default;
+    transition:all 0.3s ease-in-out;   
+}
+.sidebar ul li a:hover{    
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.sidebar ul li a.active{
+    background-color: #2FA084;    
+}
+/*logout style*/
+.sidebar_2{
+    margin-top: auto;
+    
+}
+.txtlogout{
+    color: #BC6661;
+}
+
+/*---------------------------------------*/
+/* Hero Conatiner el dahsboard principal */
+/*---------------------------------------*/
+.container-main{
+    position:relative;    
+    width: 100%;
+    display:grid;
+    height: 100vh;
+}
+
+.HeroHeader{   
+    width: 100%;    
+    display:flex;   
+    margin-left:20px;
+}
+.hero-image{
+    display: block;    
+    width: 95%;
+    height: 200px;
+    object-fit: fill; 
+    margin:20px 20px;   
+        
+}
+/* 🚀 Flotamos los contenidos encima de la imagen */
+.left {
+    position: absolute;
+    top: 25px;     /* Distancia desde el borde superior del fondo */
+    left: 55px;    /* Distancia desde el borde izquierdo del fondo */
+    z-index: 2;    /* Asegura que el texto quede por encima de la imagen */
+}
+
+.rigth {
+    position: absolute;
+    top: 44px;     /* Distancia desde el borde superior del fondo */
+    right: 60px;   /* Distancia desde el borde derecho del fondo */
+    z-index: 2;
+}
+
+/*boxes de contenido del dashboard*/
+.boxes{
+    margin-left:20px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;  
+    gap:20px;
+}
+.box1, .box2{
+    display:flex;
+    flex-direction:column;
+    padding:20px;
+    background-color: #FFFFFF;
+    border-radius:9px;
+}
+.title {
+    font-size:16px;
+    color: var(--color-text-secundary);
+}
+.valueT{
+    font-size:26px;
+    font-weight: 600;
+    color: var(--color-text-custom2);
+}
+.valueH{
+    font-size:26px;
+    font-weight: 600;
+    color: var(--color-text-custom1);
+}
+.note{
+    font-size:14px;
+    color: var(--color-text-secundary); /* el color se cambiar conforme al estado en js con c# */
+}
+/*---------------------------------------*/
+/*styles de cajas de dashboar sensore etc */
+.boxesD{    
+    margin-left: 30px;
+    display:grid;
+    grid-template-columns: repeat(4 , 1fr);  
+    gap:20px;
+}
+.box{
+    
+    width: 250px;
+    height: 120px;
+    padding: 10px 20px;
+    
+    background-color: #1D634F;
+}
