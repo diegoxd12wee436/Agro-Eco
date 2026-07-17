@@ -1,7 +1,7 @@
 :root {
     --color-primario: #2fa084;
     --color-ayuda: #3b9d85;
-    --color-contraste: #faa533;
+    --color-contraste: #2fa084;
     --color-fondo-app: #eeeeee;
     --color-font: #2c2c2c;
     --color-placeholder: #bfc6c4;
@@ -95,10 +95,25 @@ body {
     transition: var(--transition);
 }
 
-.menu-item i {
+.menu-item .icon-svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.icon-svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    object-fit: contain;
+}
+
+.brand-icon .icon-svg {
     width: 20px;
-    font-size: 16px;
-    text-align: center;
+    height: 20px;
+    filter: brightness(0) invert(1);
 }
 
 .menu-item:hover, .menu-item.active {

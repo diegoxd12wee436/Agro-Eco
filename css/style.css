@@ -94,6 +94,11 @@ body {
     transition: var(--transition);
 }
 
+.menu-item:hover, .menu-item.active {
+    opacity: 1;
+    background-color: var(--color-primario);
+}
+
 .menu-item .icon-svg {
     width: 18px;
     height: 18px;
