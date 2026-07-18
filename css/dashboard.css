@@ -341,8 +341,7 @@ aside{
     gap:10px;
 }
 .card{
-    display: grid;
-    grid-template-columns: ;
+    display: grid;   
     gap:15px;
     border-radius: 12px;
     padding: 10px 20px;
