@@ -137,18 +137,26 @@ aside{
     max-height: 150px;
     display: flex;
     flex-direction: column;
-    
+    justify-content: space-between;
+    height: 85%;
+   
     
     position: absolute;
-    top: 25px;     /* Distancia desde el borde superior del fondo */
-    left: 55px;    /* Distancia desde el borde izquierdo del fondo */
+    top: 15px;     /* Distancia desde el borde superior del fondo */
+    left: 20px;    /* Distancia desde el borde izquierdo del fondo */
     z-index: 2;    /* Asegura que el texto quede por encima de la imagen */
     
 }
 .union{
     display:flex;
-    gap:7px;    
+    gap:7px;      
     align-items: center;
+}
+.union .volverhref {
+    margin-left:-6px;
+    display: flex;
+    align-items: center;
+
 }
 .union span{
     color:#1A3D33;
@@ -161,7 +169,7 @@ aside{
 .HeadText span{
     color: var(--color-text-primary);
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
 }
 
 .rigth {
@@ -241,15 +249,16 @@ aside{
     font-weight:600;
     color: var(--color-text-custom1);
 }
-
+/*-----------------------------------*/
 /*section de weather y estado cultivo*/
+/*-----------------------------------*/
 .cont{
     display:flex;
     width: 97%;
     height: 340px;
     
 }
-.hijo1{    
+.hijo1{   
     padding:20px;
     width:55%; /* MATEMATICAMENTE LOS 2 OCUPAN TANTO HIJO 1 COMO HIJO2 LAS MISMAS PROPORCIONES EN TODAS LAS PANTALLAS */
     background-color: #FFFFFF;
@@ -277,7 +286,7 @@ aside{
 }
 .union .resumen{
     color:var(--color-text-primary);
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
 }
 #dia1 ,#dia2,#dia3,#dia4 {
@@ -317,35 +326,62 @@ aside{
     grid-template-columns: 1fr 1fr;
     gap:40px;
     margin-left:25px;
+    margin-bottom: 60px;
 }
 .alertas , .tareas{
     background-color: #FFFFFF;
     border-radius: 12px;
-    padding:16px;
-    
-    
+    padding:24px;
 }
 .line{
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
 }
+.union .alertaspan{
+    color:var(--color-text-primary);
+    font-size: 20px;
+    font-weight: 600;
+}
 #alertNotification{
     padding:2px 12px;
-    border:1px solid var(--color-text-secundary);
+    color: var(--color-text-primary);
+    border:1px solid #BFC6C4;
     border-radius: 12px;    
 }
 .cards{
-    display:flex;
-    flex-direction: column;
+    display:flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: start;
     gap:10px;
 }
 .card{
-    display: grid;   
+    display: flex;   
+    align-items: center;   
     gap:15px;
+    width: 100%;
     border-radius: 12px;
     padding: 10px 20px;
     background-color: #F4F5F5;
 }
-
-
+.card img{
+    width: 35px;
+    height: 35px;
+}
+.card .join h4 {
+    color: var(--color-text-primary);
+    font-size: 18px;
+    font-weight: 500;
+}
+.card .join p{
+    color:var(--color-text-secundary);
+    font-size: 14px;
+    font-weight: 400;
+}
+.num .ref {
+    color:var(--color-text-custom1);
+    font-size: 14px;
+    margin-right: 20px;
+    font-weight: 500;
+}
