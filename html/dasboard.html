@@ -56,14 +56,18 @@
                     <div class="rigth">
                         <div class="boxes">
                             <div class="box1">
-                                <img src = "/images/svg-hackaton/vector (5).svg" width = "25px" height = "25px">
+                                <div class="union">
+                                    <img src = "/images/svg-hackaton/vector (5).svg" width = "25px" height = "25px">
                                     <p class = "title">Temperatura Ambiente</p>
+                                </div>
                                 <span id = "Temperatura" class = "valueT">25°C </span>
-                                 <p id= "nota-temperatura" class = "note">Optimo</p>
+                                <p id= "nota-temperatura" class = "note">Optimo</p>
                             </div>
                             <div class="box2">
-                                <img src = "/images/svg-hackaton/blood 1.svg" width = "25px" height = "25px">
-                                <p class = "title" > Humedad del suelo </p> 
+                                <div class="union">
+                                    <img src = "/images/svg-hackaton/blood 1.svg" width = "25px" height = "25px">
+                                    <p class = "title" > Humedad del suelo </p> 
+                                </div>
                                 <span id = "Humedad" class = "valueH">60% </span>
                                 <p id= "nota-humedad" class = "note">Optimo</p> <!--Nota Aqui el valor cambiara con c# y js-->
                             </div>
@@ -104,11 +108,116 @@
                     </div>
                 </div>
 
+                <!--section de card de estado cultivo -->
+                <div class="cont">
+                    <!--Historial cultivo (estado)-->
+                    <div class="hijo1">
+                        <div class="union">
+                            <img src="/images/svg-hackaton/Vector (6).svg" alt="sun" width="30px" height="30px">
+                            <span class = "resumen">Resumen semanal (Temp / Humedad)</span>
+                        </div>
+                        <!--Reutilizo codigo DRY no te repitas mi norma (es para no escribir tanto innesesario xd)-->
+                        <div class="boxesC">
+                            <div class="boxCalendar">
+                                <span id = "dia1">Lun</span>
+                                <img src="/images/svg-hackaton/Vector (6).svg" alt="sun" width="25px" height="25px">
+                                <span id = "tempDia1">{temp}</span>
+                                <span id = "humedadDia1">{hum}</span>
+                            </div>
+                            <div class="boxCalendar">
+                                <span id = "dia2">Mar</span>
+                                <img src="/images/svg-hackaton/Vector (6).svg" alt="sun" width="25px" height="25px">
+                                <span id = "tempDia2">{temp}</span>
+                                <span id = "humedadDia2">{hum}</span>
+                            </div>
+                            <div class="boxCalendar">
+                                <span id = "dia3">Mie</span>
+                                <img src="/images/svg-hackaton/Vector (6).svg" alt="sun" width="25px" height="25px">
+                                <span id = "tempDia3">{temp}</span>
+                                <span id = "humedadDia3">{hum}</span>
+                            </div>
+                            <div class="boxCalendar">
+                                <span id = "dia4">Jue</span>
+                                <img src="/images/svg-hackaton/Vector (6).svg" alt="sun" width="25px" height="25px">
+                                <span id = "tempDia4">{temp}</span>
+                                <span id = "humedadDia4">{hum}</span>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <!--Estado cultivo-->
+                    <div class="hijo2">
+                        <h3 style="color:#1D634F ;font-size:24px;" >Estado Cultivo</h3>
+                        <img src="/images/svg-hackaton/Group 142.svg" alt="estado-cultivo-svg" width="160px" heigth = "160px">
+                        <span id="dashReportPlagas" class ="plagasMsg">Sin plagas reportadas</span>
+                        <img src="/images/svg-hackaton/Group 143.svg" alt="button-figma" width="auto" height="30px"> <!--estos svg bien los podia hacer desde 0 los reutilice del figma para avanzar rapido-->
+
+                    </div>
+                </div>
+                
+
+
                 
                 
                 
                 
 
+            </div>
+            <!----------------------------->
+            <!------------pag 2 ----------->
+            <!----------------------------->
+
+            <!--Alertas y tareas Vista rapida-->
+            <div class="contpag2">
+                <div class="alertas">
+                    <div class="line">
+                        <div class="union">
+                            <img src="/images/svg-hackaton/Vector (8).svg" alt="">
+                            <span>Alertas Recientes</span>
+                        </div>
+                        <div class="num">
+                            <span id = "alertNotification">2</span>
+                        </div>
+                    </div>
+                    <div class="cards"> <!--Son card de manera vertical son rows de la alertas pueden hgenerarse muchas -->
+                        <div class="card">
+                            <div>
+                                <img src="/images/svg-hackaton/alerta1.svg" alt="" width="30px" height="30px">
+                            </div>
+                            <div class="join">
+                                <h4>Alerta 1</h4>
+                                <p>Hace : <span id = "alertTime">{minutos -horas -dias}</span></p> <!--Aqui sera con c# comunicacion js con c# y luego muestra datos-->
+                            </div>
+
+
+                        </div>
+                        <div class="card">
+                            <img src="/images/svg-hackaton/alerta2.svg" alt="" width="30px" height="30px">
+                            <h4>Alerta 2</h4>
+                            <p>Hace : <span id = "alertTime">{minutos -horas -dias}</span></p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="tareas">
+                    <div class="line">
+                        <div class="union">
+                            <img src="/images/svg-hackaton/Group 140.svg" alt="">
+                            <span>Tareas de la finca</span>
+                        </div>
+                        <div class="num"> <!--reutilizo solo el css en realidas es el ver todas las tareas-->
+                            <a href="#">Ver todas</a>
+                        </div>
+
+                    </div>
+                        <!--cards -->
+                    
+
+
+                </div>
             </div>
         </main>
 
