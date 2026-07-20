@@ -42,7 +42,7 @@ function updateAmbiente({ temperatura, notaTemperatura, humedad, notaHumedad }) 
     if (temperatura !== undefined) el.temp.textContent = `${temperatura}°C`;
     if (notaTemperatura !== undefined) el.notaTemp.textContent = notaTemperatura;
     if (humedad !== undefined) el.humedad.textContent = `${humedad}%`;
-    if (notaHumedad !== undefined) el.notaHumedad.textContent = notaHumedad;
+    if (notaHumedad !== undefined) el.notaHumedad.textContent = notaHumedad; 
 }
 
 // ---------- 2. Nombre de finca ----------
