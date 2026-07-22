@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // Diego tuve que hacer un js para simular la base de datos de las plagas para mostrar funciones
+    // Base de datos simulada de plagas para la demostración interactiva
     const DB_PLAGAS = [
         {
             nombre: "Roya del Café",
@@ -36,7 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
-    // diego aqui van los selectores de los elementos del DOM que vamos a manipular
+    // Límite máximo de tareas activas simultáneas
+    const MAX_TAREAS = 5;
+
+    // Referencias a los elementos del DOM
     const searchInput = document.getElementById("pest-search");
     const resultsContainer = document.getElementById("search-results");
     const quickBtns = document.querySelectorAll(".tag-btn");
@@ -52,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tasksContainer = document.getElementById("active-tasks-container");
     const taskCounter = document.getElementById("task-counter");
 
-    // 2. aqui cree un basico buscador de plagas con un autocompletado simple, que filtra por nombre o nombre cientifico
+    // Buscador con filtrado en tiempo real (por nombre común o científico)
     searchInput.addEventListener("input", (e) => {
         const val = e.target.value.toLowerCase().trim();
         resultsContainer.innerHTML = "";
@@ -84,14 +87,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Cse cierra el buscador 
+    // Cerrar la lista desplegable al hacer clic fuera del buscador
     document.addEventListener("click", (e) => {
         if (e.target !== searchInput) {
             resultsContainer.style.display = "none";
         }
     });
 
-    //Aqui agregue la funcionalidad de los botones de plagas rapidas, que cargan la ficha tecnica directamente
+    // Accesos rápidos por etiquetas (tags)
     quickBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             const nombrePlaga = btn.getAttribute("data-name");
@@ -103,11 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // SE CARGAN LOS DATOS DE LA FICHA TECNICA DE LA PLAGA SELECCIONADA
+    // Carga dinámicamente la información técnica de la plaga seleccionada
     function cargarPlaga(plaga) {
         labelRisk.textContent = plaga.riesgo;
         
-        // se reseetean a los colores basicos segun su gravedad
+        // Ajuste de los estilos visuales del nivel de riesgo
         labelRisk.className = ""; 
         if (plaga.riesgo.includes("Alto")) labelRisk.className = "badge-danger";
         else if (plaga.riesgo.includes("Medio")) labelRisk.className = "badge-warning";
@@ -119,14 +122,27 @@ document.addEventListener("DOMContentLoaded", () => {
         labelTreat.textContent = plaga.tratamiento;
     }
 
-    // 3. aqui esta la logica del boton que me pediste sobre "iniciar tareas de mitigacion"
+    // Creación y asignación de tareas de mitigación en el panel
     btnAction.addEventListener("click", () => {
+        // Validar que no se supere el límite de tareas activas
+        const tareasActuales = tasksContainer.querySelectorAll(".task-item").length;
+        if (tareasActuales >= MAX_TAREAS) {
+            const originalText = btnAction.innerHTML;
+            btnAction.style.backgroundColor = "#e74c3c"; // Rojo de advertencia
+            btnAction.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Límite (${MAX_TAREAS}) alcanzado`;
+            
+            setTimeout(() => {
+                btnAction.style.backgroundColor = "";
+                btnAction.innerHTML = originalText;
+            }, 2000);
+            return;
+        }
+
         const nombrePlaga = labelName.textContent;
         const lote = targetLot.value;
         const accionPredeterminada = (nombrePlaga.includes("Roya")) ? "Aplicación de Cobre" : 
-                                    (nombrePlaga.includes("Broca")) ? "Trampas de Captura" : "Aspersión Foliar";
+                                     (nombrePlaga.includes("Broca")) ? "Trampas de Captura" : "Aspersión Foliar";
 
-        // diego aqui se crean las tareas en el DOM
         const nuevaTarea = document.createElement("div");
         nuevaTarea.className = "task-item";
         nuevaTarea.innerHTML = `
@@ -136,16 +152,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="task-sub">${nombrePlaga} · <strong>${lote}</strong></p>
                 <span class="task-date">Iniciada hace unos instantes</span>
             </div>
-            <button class="btn-complete-task" onclick="completarTarea(this)"><i class="fa-solid fa-check"></i></button>
+            <button class="btn-complete-task"><i class="fa-solid fa-check"></i></button>
         `;
 
-        // Añadir al contenedor
+        // Agregar la nueva tarea al inicio de la lista
         tasksContainer.prepend(nuevaTarea);
-        
-        // Actualizar contador visual de tareas activas
         actualizarContador();
 
-        // Pequeño feedback visual en el botón
+        // Retroalimentación visual interactiva en el botón
         const originalText = btnAction.innerHTML;
         btnAction.style.backgroundColor = "#3b9d85";
         btnAction.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Tarea Asignada!`;
@@ -154,24 +168,26 @@ document.addEventListener("DOMContentLoaded", () => {
             btnAction.innerHTML = originalText;
         }, 1800);
     });
+
+    // Gestión para completar y remover tareas con animación
+    tasksContainer.addEventListener("click", (e) => {
+        const btn = e.target.closest(".btn-complete-task");
+        if (!btn) return;
+
+        const item = btn.parentElement;
+        item.style.transform = "scale(0.9)";
+        item.style.opacity = "0";
+        setTimeout(() => {
+            item.remove();
+            actualizarContador();
+        }, 250);
+    });
+
+    // Actualiza el indicador visual de tareas activas
+    function actualizarContador() {
+        const total = tasksContainer.querySelectorAll(".task-item").length;
+        if (taskCounter) {
+            taskCounter.textContent = `${total} Activas`;
+        }
+    }
 });
-
-// aqui cree una funcion para completar las tareas, que elimina el elemento del DOM y actualiza el contador
-function completarTarea(btn) {
-    const item = btn.parentElement;
-    item.style.transform = "scale(0.9)";
-    item.style.opacity = "0";
-    setTimeout(() => {
-        item.remove();
-        actualizarContador();
-    }, 250);
-}
-
-// Función auxiliar de conteo
-function actualizarContador() {
-    const total = document.querySelectorAll(".task-item").length;
-    document.getElementById("task-counter").textContent = `${total} Activas`;
-}
-
-
-//se que me  pediste no crear js pero aqui solo para demostrar la funcionalidad de las tareas, si quieres puedo quitarlo y dejarlo solo en html y css, pero no se veria tan bien

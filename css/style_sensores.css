@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Boldonse&family=Iosevka+Charon:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
+    --font-primary: 'Poppins', sans-serif;
+    --font-secundary: 'Iosevka Charon', monospace;
     --color-primario: #2fa084;
     --color-ayuda: #3b9d85;
     --color-contraste: #3b9d85;
@@ -6,7 +10,7 @@
     --color-font: #2c2c2c;
     --color-placeholder: #bfc6c4;
     --color-blanco: #ffffff;
-    --sidebar-bg: #1e5a4a;
+    --sidebar-bg: #1d634f;
     --border-radius: 18px;
     --transition: all 0.25s ease;
 }
@@ -18,134 +22,117 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: var(--font-primary);
     background-color: var(--color-fondo-app);
     color: var(--color-font);
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .app-container {
     display: flex;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
+}
+
+/* 
+   SIDEBAR / MENÚ
+   */
+aside {
+    display:flex;
+    flex-direction: column;
+    max-width: 250px;
+    height: 100vh;
+    padding:20px;   
+    /*Color de fondo del sidebar*/
+    background-color: #1D634F;
 }
 
 .sidebar {
-    width: 260px;
-    background-color: var(--sidebar-bg);
-    color: var(--color-blanco);
     display: flex;
     flex-direction: column;
-    padding: 24px 16px;
-    justify-content: space-between;
+    flex: 1;
 }
 
-.sidebar-brand {
+.logo {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding-left: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    overflow: visible;
 }
 
-.brand-icon {
-    background-color: var(--color-contraste);
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: var(--color-blanco);
+.logo .logo-svg {
+    width: 70px;
+    height: auto;
 }
 
-.brand-text h1 {
-    font-size: 18px;
+.logo-text {
+    font-family: var(--font-secundary);
+    font-size: 28px;
     font-weight: 700;
-    margin: 0;
+    color: #ededed;
+    text-align: center;
 }
 
-.brand-text span {
-    font-size: 11px;
-    opacity: 0.6;
-    display: block;
-}
-
-.sidebar-menu {
+.sidebar ul {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    flex-grow: 1;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.menu-item {
-    display: flex;
+.sidebar ul li a {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 10px;
+    padding: 10px 20px;
     align-items: center;
-    gap: 14px;
-    padding: 12px 16px;
-    color: var(--color-blanco);
-    text-decoration: none;
+    margin-top: 10px;
+    color: #ededed;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 12px;
-    opacity: 0.75;
-    transition: var(--transition);
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
 }
 
-.menu-item:hover, .menu-item.active {
-    opacity: 1;
-    background-color: var(--color-primario);
-}
-
-.menu-item .icon-svg {
-    width: 18px;
-    height: 18px;
-    filter: brightness(0) invert(1);
-}
-
-.icon-svg {
-    width: 18px;
-    height: 18px;
-    display: block;
-    object-fit: contain;
-}
-
-.brand-icon .icon-svg {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1);
-}
-
-.metric-icon .icon-svg,
-.device-icon .icon-svg {
-    width: 20px;
-    height: 20px;
-    filter: none;
-}
-
-.menu-item:hover {
-    opacity: 1;
+.sidebar ul li a:hover {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
-.menu-item.active {
-    opacity: 1;
-    background-color: var(--color-primario);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.sidebar ul li a.active {
+    background-color: #2fa084;
 }
 
-.text-danger {
-    color: #ff6b6b !important;
+.sidebar_2 {
+    margin-top: auto;
 }
 
+.txtlogout {
+    color: #bc6661;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+}
+
+/* 
+   CONTENIDO PRINCIPAL Y DASHBOARD
+    */
 .main-content {
     flex-grow: 1;
     padding: 30px;
     overflow-y: auto;
     background-color: var(--color-fondo-app);
 }
+
 .content-header {
     display: flex;
     justify-content: space-between;
@@ -165,6 +152,7 @@ body {
     opacity: 0.6;
     margin-top: 4px;
 }
+
 .status-badge {
     display: flex;
     align-items: center;
@@ -197,6 +185,7 @@ body {
     background-color: currentColor;
 }
 
+/* Grid del Dashboard */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 320px;
@@ -248,7 +237,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
 }
 
 .icon-temp { background-color: #ffebee; color: #e53935; }
@@ -320,6 +308,7 @@ body {
     width: 100%;
 }
 
+/* Columna Derecha */
 .right-column {
     display: flex;
     flex-direction: column;
@@ -337,9 +326,6 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
-    font-size: 14px;
-    color: var(--color-font);
-    opacity: 0.8;
 }
 
 .summary-header h3 { font-size: 16px; font-weight: 700; }
@@ -358,7 +344,6 @@ body {
 .item-online strong { color: var(--color-primario); font-size: 16px; }
 .item-warning strong { color: var(--color-contraste); font-size: 16px; }
 .item-offline strong { color: var(--color-placeholder); font-size: 16px; }
-
 
 .card-devices {
     background-color: var(--color-blanco);
@@ -381,13 +366,12 @@ body {
 .btn-refresh {
     background: transparent;
     border: none;
-    color: var(--color-placeholder);
-    font-size: 16px;
     cursor: pointer;
-    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
 }
-
-.btn-refresh:hover { color: var(--color-primario); }
 
 .device-list {
     display: flex;
@@ -405,12 +389,6 @@ body {
 
 .device-item:last-child {
     border-bottom: none;
-}
-
-.device-icon {
-    color: var(--color-primario);
-    font-size: 18px;
-    margin-top: 2px;
 }
 
 .device-info {
@@ -462,6 +440,9 @@ body {
     font-size: 10px;
     color: var(--color-primario);
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .device-status .time {
@@ -476,7 +457,38 @@ body {
     opacity: 0.8;
 }
 
-.offline-mode {
-    opacity: 0.4;
-    pointer-events: none;
+.icon-svg {
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px;
+    max-height: 20px;
+    object-fit: contain;
+    display: inline-block;
+}
+
+
+.summary-header .icon-svg {
+    width: 22px !important;
+    height: 22px !important;
+}
+
+.device-status .icon-svg {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* 
+   diseño responsive 
+  */
+
+/* Laptops Medianas */
+@media (max-width: 1100px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; 
+    }
+
+    .right-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+    }
 }
