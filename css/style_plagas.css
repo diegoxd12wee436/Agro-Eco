@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Boldonse&family=Iosevka+Charon:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/*
+   PALETA DE COLORES Y VARIABLES GLOBALES
+   Aquí centralizamos los tonos principales, tipografías y bordes 
+   para mantener todo el sitio uniforme y fácil de personalizar.
+*/
+:root {
+    --font-primary: 'Poppins', sans-serif;
+    --font-secundary: 'Iosevka Charon', monospace;
+    --color-primario: #2fa084;
+    --color-ayuda: #3b9d85;
+    --color-contraste: #3b9d85;
+    --color-fondo-app: #eeeeee;
+    --color-font: #2c2c2c;
+    --color-placeholder: #bfc6c4;
+    --color-blanco: #ffffff;
+    --sidebar-bg: #1d634f;
+    --border-radius: 18px;
+    --transition: all 0.25s ease;
+}
+
+/* Reset básico para evitar descuadres de márgenes o bordes raros */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-fondo-app);
+    color: var(--color-font);
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Envoltorio general de la aplicación */
+.app-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/*
+   BARRA LATERAL (SIDEBAR)
+   Ancho fijo de 250px para encajar al panel principal.
+    */
+aside {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    height: 100vh;
+    padding: 20px;
+    background-color: var(--sidebar-bg);
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Identidad visual y logotipo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    overflow: visible;
+}
+
+.logo .logo-svg {
+    width: 70px;
+    height: auto;
+}
+
+.logo-text {
+    font-family: var(--font-secundary);
+    font-size: 28px;
+    font-weight: 700;
+    color: #ededed;
+    text-align: center;
+}
+
+/* Opciones de navegación */
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: 4px;
+}
+
+/* Estilo base de los botones del menú */
+.sidebar ul li a {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 10px;
+    padding: 10px 20px;
+    align-items: center;
+    margin-top: 10px;
+    color: #ededed;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+/* Interacción: iluminación sutil únicamente cuando el usuario pasa el cursor */
+.sidebar ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Sección inferior: opción de cierre de sesión */
+.sidebar_2 {
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+.txtlogout {
+    color: #bc6661;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+}
+
+.text-danger {
+    color: #ff6b6b !important;
+}
+
+/* 
+   ÁREA DE CONTENIDO PRINCIPAL
+   El lienzo donde se despliegan las tarjetas y la información.
+ */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+    background-color: var(--color-fondo-app);
+}
+
+.content-header {
+    margin-bottom: 26px;
+}
+
+.content-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-font);
+}
+
+.content-header p {
+    font-size: 13px;
+    color: var(--color-font);
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+/* 
+   ESTRUCTURA DE REJILLA (GRID)
+   Organiza el contenido en 2 columnas: la principal a la izquierda y un panel lateral a la derecha.
+   */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Campo de búsqueda dinámico */
+.card-search {
+    background-color: var(--color-blanco);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-placeholder);
+    font-size: 16px;
+}
+
+#pest-search {
+    width: 100%;
+    padding: 14px 16px 14px 46px;
+    border: 2px solid #eaeaea;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    color: var(--color-font);
+    transition: var(--transition);
+}
+
+#pest-search:focus {
+    border-color: var(--color-primario);
+}
+
+/* Menú desplegable con sugerencias de búsqueda */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-blanco);
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    list-style: none;
+    margin-top: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.search-results li {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.search-results li:hover {
+    background-color: #f4faf8;
+    color: var(--color-primario);
+}
+
+/* Accesos rápidos e etiquetas (tags) */
+.quick-tags {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--color-font);
+    opacity: 0.8;
+}
+
+.tag-btn {
+    background-color: var(--color-fondo-app);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-font);
+    transition: var(--transition);
+}
+
+.tag-btn:hover {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+/*
+   TARJETA INFORMATIVA: DETALLES DE PLAGAS
+   */
+.card-pest-info {
+    background-color: var(--color-blanco);
+    border-radius: var(--border-radius);
+    padding: 26px;
+}
+
+.pest-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.pest-title-block h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+.pest-title-block em {
+    color: var(--color-placeholder);
+    font-size: 14px;
+}
+
+.badge-danger {
+    background-color: #fce8e6;
+    color: #c5221f;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.pest-avatar {
+    background-color: #fef7e0;
+    color: var(--color-contraste);
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+.pest-description, .pest-treatment {
+    margin-bottom: 20px;
+}
+
+.pest-description h4, .pest-treatment h4 {
+    font-size: 14px;
+    color: var(--color-primario);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pest-description p, .pest-treatment p {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+/* Módulo interactivo para asignación de tareas */
+.task-action-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-fondo-app);
+    padding: 16px;
+    border-radius: 12px;
+    gap: 16px;
+}
+
+.select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.select-group label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-placeholder);
+    text-transform: uppercase;
+}
+
+.select-group select {
+    padding: 8px 12px;
+    border: 1px solid var(--color-placeholder);
+    border-radius: 8px;
+    outline: none;
+    background: var(--color-blanco);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.btn-start-task {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.btn-start-task:hover {
+    background-color: var(--color-ayuda);
+}
+
+/* 
+   PANEL LATERAL: LISTA DE TAREAS ACTIVAS
+   */
+.card-active-tasks {
+    background-color: var(--color-blanco);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tasks-header h3 { font-size: 16px; font-weight: 700; }
+
+.task-count {
+    background-color: var(--color-fondo-app);
+    color: var(--color-primario);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    background-color: #fafafa;
+    transition: var(--transition);
+}
+
+.task-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.task-status-dot.pending {
+    background-color: var(--color-contraste);
+}
+
+.task-details {
+    flex-grow: 1;
+}
+
+.task-details h4 {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.task-sub {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.task-date {
+    font-size: 10px;
+    color: var(--color-placeholder);
+}
+
+.btn-complete-task {
+    background: #e2f4f0;
+    border: none;
+    color: var(--color-primario);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: var(--transition);
+}
+
+.btn-complete-task:hover {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+/* 
+   diseño responsive 
+  */
+
+/* Laptops Medianas */
+@media (max-width: 1100px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; 
+    }
+
+    .right-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+    }
+}
